@@ -22,14 +22,14 @@ def import_notebook_module(notebook_path):
     spec = importlib.util.spec_from_loader(module_name, loader=None)
     module = importlib.util.module_from_spec(spec)
     sys.modules[module_name] = module
-    
+
     with open(notebook_path, 'r') as f:
         notebook_content = nbconvert.PythonExporter().from_filename(notebook_path)[0]
-    
+
     exec(notebook_content, module.__dict__)
     return module
 
-# Then use in tests
+# # Then use in tests
 assignment = import_notebook_module('assignment.ipynb')
 
 def test_while_loop_even_numbers(capsys):
